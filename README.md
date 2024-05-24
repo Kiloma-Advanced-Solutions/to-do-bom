@@ -41,12 +41,9 @@ We'll start by setting up our Next.js project and configuring it to use TypeScri
 1. **Project Setup:**
    - Initialize a new Next.js project:
      ```bash
-     npx create-next-app@latest task-manager
+     npx create-next-app@latest to-do-bom
      ```
-   - Setup TypeScript:
-     ```bash
-     touch tsconfig.json
-     ```
+  
    - Configure project structure.
 
 2. **Authentication & Authorization:**
