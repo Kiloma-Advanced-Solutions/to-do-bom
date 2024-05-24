@@ -31,7 +31,7 @@ Welcome to the Next.js Advanced Features Training! This week, we will build a Ta
 **Topics:**
 - Introduction to the Task Management Application
 - Project setup and structure
-- Implementing authentication and authorization
+- Implementing authentication and authorization using Server Actions
 
 **Details:**
 We'll start by setting up our Next.js project and configuring it to use TypeScript. We'll then implement user authentication using NextAuth.js and set up role-based authorization.
@@ -41,26 +41,31 @@ We'll start by setting up our Next.js project and configuring it to use TypeScri
 1. **Project Setup:**
    - Initialize a new Next.js project:
      ```bash
-     npx create-next-app@latest to-do-bom
+     npx create-next-app@latest
      ```
-  
-   - Configure project structure.
+   - Enter project name (to-do-bom)
+   - Approve all the steps (ESlint, TypeScript, App Router, etc.)
 
-2. **Authentication & Authorization:**
+2. **Configure Project Structure:**
+   - Organize the project into `app`, `components`, and `styles` directories.
+   - The `app` directory will contain subdirectories for each page and API route.
+
+3. **Authentication & Authorization:**
    - Install NextAuth.js:
      ```bash
      npm install next-auth
      ```
-   - Create sign-up and login pages.
-   - Define user roles (admin, user) and protect routes based on roles.
+   - Configure NextAuth.js in `app/api/auth/[...nextauth]/route.ts`.
+   - Create sign-up and login pages in `app/signup/page.tsx` and `app/login/page.tsx`.
+   - Implement role-based route protection using a higher-order component (HOC) in `hoc/withAuth.tsx`.
 
 ### Tasks
 
 1. Initialize the project and configure TypeScript.
-2. Set up the project structure with pages, components, and styles.
-3. Create the Sign Up page with a form and integrate it with the sign-up API.
-4. Create the Login page with a form and integrate it with the login API.
-5. Implement role-based route protection.
+2. Set up the project structure with `app`, `components`, and `styles` directories.
+3. Create the Sign Up page with a form and integrate it with a Server Action for sign-up.
+4. Create the Login page with a form and integrate it with NextAuth.js.
+5. Implement role-based route protection using an HOC.
 
 ---
 
@@ -79,8 +84,7 @@ Today, we'll implement middleware for request handling and validation, manage us
 ### Instructions
 
 1. **Middleware:**
-   - Create middleware for logging request details.
-   - Implement request validation middleware.
+   - Implement logging and request validation middleware.
    - Use middleware to protect sensitive routes.
 
 2. **Cookies & Local Storage:**
@@ -112,7 +116,7 @@ We'll build the core functionality of our application by implementing task manag
 ### Instructions
 
 1. **Task Management:**
-   - Create task model and API routes.
+   - Create task model and Server Actions for CRUD operations.
    - Implement task creation, editing, and deletion.
    - Develop client-side components for task forms and lists.
 
@@ -126,7 +130,7 @@ We'll build the core functionality of our application by implementing task manag
 
 ### Tasks
 
-1. Create task model and implement API routes for task operations.
+1. Create task model and implement Server Actions for task operations.
 2. Develop components for task creation, editing, and listing.
 3. Implement caching for task data using SWR or React Query.
 4. Use static generation for the home page and SSR for the dashboard.
