@@ -10,7 +10,7 @@ export const authOptions = {
         password: { label: 'Password', type: 'password' }
       },
       authorize: async (credentials) => {
-        // Add your own logic to find the user
+        console.log('we are not going to check anything here - for training only')
         const user = { id: '1', name: 'Eyal', email: 'eyal@kiloma.com', role: 'admin' };
 
         if (user) {
@@ -24,17 +24,17 @@ export const authOptions = {
   pages: {
     signIn: '/login',
     signOut: '/',
-    error: '/login' // Error code passed in query string as ?error=
+    error: '/login'
   },
   callbacks: {
-    async jwt({ token, user } : { token: { id: string, role: string }, user: { id: string, role: string } }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.role = user.role;
       }
       return token;
     },
-    async session({ session, token }: { session: any, token: { id: string, role: string } }) {
+    async session({ session, token }) {
       session.user.id = token.id;
       session.user.role = token.role;
       return session;
