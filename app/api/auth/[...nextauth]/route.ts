@@ -1,15 +1,20 @@
-import NextAuth from 'next-auth';
+import NextAuth, { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GithubProvider from 'next-auth/providers/github';
 
-export const authOptions = {
+const authOptions: AuthOptions = {
   providers: [
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID ?? '',
+      clientSecret: process.env.GITHUB_CLIENT_SECRET ?? ''
+    }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' }
       },
-      authorize: async (credentials) => {
+      authorize: async (credentials: any) => {
         console.log('we are not going to check anything here - for training only')
         const user = { id: '1', name: 'Eyal', email: 'eyal@kiloma.com', role: 'admin' };
 
@@ -21,20 +26,15 @@ export const authOptions = {
       }
     })
   ],
-  pages: {
-    signIn: '/login',
-    signOut: '/',
-    error: '/login'
-  },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any, user: any }) {
       if (user) {
         token.id = user.id;
         token.role = user.role;
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: any, token: any }) {
       session.user.id = token.id;
       session.user.role = token.role;
       return session;
